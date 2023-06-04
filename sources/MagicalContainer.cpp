@@ -33,11 +33,12 @@ namespace ariel {
     }
     // Ascending Iterator
 
-    MagicalContainer::AscendingIterator::AscendingIterator(MagicalContainer& cont, size_t idx)
-            : container(cont), index(idx) {}
+    MagicalContainer::AscendingIterator::AscendingIterator(MagicalContainer& cont)
+            : container(cont),iterator(cont.ascending.begin()) {
+    }
 
     bool MagicalContainer::AscendingIterator::operator==(const AscendingIterator& other) const {
-        return index == other.index;
+        return this->iterator == other.;
     }
 
     bool MagicalContainer::AscendingIterator::operator!=(const AscendingIterator& other) const {
@@ -118,6 +119,14 @@ namespace ariel {
 
     int* MagicalContainer::SideCrossIterator::end() const {
         return &(container.elements[container.elements.size()]);
+    }
+
+    std::list<int>::iterator MagicalContainer::SideCrossIterator::getIteratorBegin() const {
+        return this->iteratorBegin;
+    }
+
+    std::list<int>::iterator MagicalContainer::SideCrossIterator::getIteratorEnd() const {
+        return this->iteratorEnd;
     }
 
 
