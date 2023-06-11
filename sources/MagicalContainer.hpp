@@ -6,12 +6,16 @@
 #include <list>
 #include <iterator>
 #include <algorithm>
+#include "LinkedList.hpp"
+#include "Base_Iterator.hpp"
 
 namespace ariel {
-    class MagicalContainer {
+    class MagicalContainer{
     private:
         std::vector<int> elements;
-        std::list<int*> prime;
+        LinkedList prime;
+        LinkedList cross;
+        LinkedList ascending;
 
     public:
         MagicalContainer();
@@ -20,69 +24,112 @@ namespace ariel {
         void addElement(int element);
         int size() const;
         void removeElement(int element);
+        static bool isPrime(int number);
+        void updateCross();
+        MagicalContainer(const MagicalContainer& other) = default;
 
-        // Ascending Iterator class
-        class AscendingIterator {
+        // Copy assignment operator
+        MagicalContainer& operator=(const MagicalContainer& other) = default;
+
+        // Move constructor
+        MagicalContainer(MagicalContainer&& other) noexcept = default;
+
+        // Move assignment operator
+        MagicalContainer& operator=(MagicalContainer&& other) noexcept = default;
+//
+//        class Base_Iterator {
+//        private:
+//            MagicalContainer &container;
+//            std::weak_ptr<Node> element;
+//        public:
+//            Base_Iterator(const MagicalContainer &container);
+//
+//            virtual ~Base_Iterator() = default;
+//            Base_Iterator(const Base_Iterator &other) = default;
+//            Base_Iterator(Base_Iterator &&other) = default;
+//
+//            Base_Iterator &operator=(const Base_Iterator &other) = delete;
+//            Base_Iterator &operator=(Base_Iterator &&other) = delete;
+//
+//            bool operator==(const Base_Iterator &other) const;
+//            bool operator!=(const Base_Iterator &other) const;
+//            bool operator<(const Base_Iterator &other) const;
+//            bool operator>(const Base_Iterator &other) const;
+//        };
+
+        // Ascending Base_Iterator class
+        class AscendingIterator{
         private:
             MagicalContainer& container;
-            std::list<int*>::iterator iterator;
+            std::weak_ptr<Node> element;
+            void setElementNull();
 
         public:
             explicit AscendingIterator(MagicalContainer& cont);
-            std::vector<int>::iterator getIterator() const;
+            AscendingIterator(const AscendingIterator& other);
+            AscendingIterator(AscendingIterator&& other) noexcept = default;
+            AscendingIterator& operator=(const AscendingIterator& other);
+            AscendingIterator& operator=(AscendingIterator&& other) noexcept ;
+            ~AscendingIterator() =default;
+            std::weak_ptr<Node> getElement() const;
             bool operator==(const AscendingIterator& other) const;
             bool operator!=(const AscendingIterator& other) const;
             bool operator>(const AscendingIterator& other) const;
             bool operator<(const AscendingIterator& other) const;
             int operator*() const;
             AscendingIterator& operator++();
-            const AscendingIterator operator++(int);
-            int* begin() const;
-            int* end() const;
+            AscendingIterator begin() const;
+            AscendingIterator end() const;
         };
 
-        // SideCross Iterator class
+        // SideCross Base_Iterator class
         class SideCrossIterator {
         private:
             MagicalContainer& container;
-            std::list<int>::iterator iteratorBegin;
-            std::list<int>::iterator iteratorEnd;
-
+            std::weak_ptr<Node> element;
+            void setElementNull();
 
         public:
             explicit SideCrossIterator(MagicalContainer& cont);
-
+            SideCrossIterator();
+            ~SideCrossIterator()=default;
+            SideCrossIterator(const SideCrossIterator& other);
+            SideCrossIterator(SideCrossIterator&& other) noexcept = default;
+            SideCrossIterator& operator=(const SideCrossIterator& other);
+            SideCrossIterator& operator=(SideCrossIterator&& other) noexcept ;
             bool operator==(const SideCrossIterator& other) const;
             bool operator!=(const SideCrossIterator& other) const;
             bool operator>(const SideCrossIterator& other) const;
             bool operator<(const SideCrossIterator& other) const;
             int operator*() const;
-            std::list<int>::iterator getIteratorBegin() const;
-            std::list<int>::iterator getIteratorEnd() const;
+            std::weak_ptr<Node> getElement() const;
             SideCrossIterator& operator++();
-            const SideCrossIterator operator++(int);
-            int* begin() const;
-            int* end() const;
+            SideCrossIterator begin() const;
+            SideCrossIterator end() const;
         };
 
-        // Prime Iterator class
+        // Prime Base_Iterator class
         class PrimeIterator {
         private:
             MagicalContainer& container;
-            std::list<int>::iterator iterator;
-
+            std::weak_ptr<Node> element;
+            void setElementNull();
         public:
-            explicit PrimeIterator(MagicalContainer& cont, size_t idx = 0);
-            std::list<int>::iterator getIterator() const;
+            explicit PrimeIterator(MagicalContainer& cont);
+            ~PrimeIterator()=default;
+            PrimeIterator(const PrimeIterator& other);
+            PrimeIterator(PrimeIterator&& other) noexcept = default;
+            PrimeIterator& operator=(const PrimeIterator& other);
+            PrimeIterator& operator=(PrimeIterator&& other) noexcept;
+            std::weak_ptr<Node> getElement() const;
             bool operator==(const PrimeIterator& other) const;
             bool operator!=(const PrimeIterator& other) const;
             bool operator>(const PrimeIterator& other) const;
             bool operator<(const PrimeIterator& other) const;
             int operator*() const;
             PrimeIterator& operator++();
-            const PrimeIterator operator++(int);
-            int* begin() const;
-            int* end() const;
+            PrimeIterator begin() const;
+            PrimeIterator end() const;
         };
     };
 }
