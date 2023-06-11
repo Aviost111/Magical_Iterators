@@ -7,7 +7,7 @@ namespace ariel {
     MagicalContainer::AscendingIterator::AscendingIterator(MagicalContainer &cont)
             : container(cont), element(cont.ascending.getHead()) {}
 
-    std::weak_ptr<Node> MagicalContainer::AscendingIterator::getElement() const {
+    std::weak_ptr <Node> MagicalContainer::AscendingIterator::getElement() const {
         return element;
     }
 
@@ -111,14 +111,18 @@ namespace ariel {
     }
 
     // Move assignment operator
-    MagicalContainer::AscendingIterator &MagicalContainer::AscendingIterator::operator=(AscendingIterator &&other)  noexcept {
-        if (this != &other) {
-            container = other.container;
-            element = std::move(other.element);
-            other.setElementNull();
-        }
-        return *this;
-    }
+    MagicalContainer::AscendingIterator &MagicalContainer::AscendingIterator::operator=(AscendingIterator &&other)
+
+    noexcept {
+    if (this != &other) {
+    container = other.container;
+    element = std::move(other.element);
+    other.
+
+    setElementNull();
+}
+return *this;
+}
 
 
 }

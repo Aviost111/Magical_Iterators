@@ -29,12 +29,12 @@ namespace ariel {
             // Allocate memory for the new element and create a shared_ptr
             shared_ptr<int> pointer = make_shared<int>(element);
             ascending.insert(pointer);
-            if(!this->size()){
+            if (!this->size()) {
                 cross.insert(pointer);
-            }else{
+            } else {
                 updateCross();
             }
-            if(isPrime(element)){
+            if (isPrime(element)) {
                 prime.insert(pointer);
             }
             // Find the position to insert the element
@@ -46,7 +46,7 @@ namespace ariel {
     }
 
     void MagicalContainer::removeElement(int element) {
-        if(std::find(elements.begin(), elements.end(),element)==elements.end()){
+        if (std::find(elements.begin(), elements.end(), element) == elements.end()) {
             throw runtime_error("doesn't exist");
         }
         auto it = find(this->elements.begin(), this->elements.end(), element);
@@ -98,8 +98,8 @@ namespace ariel {
 
     void MagicalContainer::updateCross() {
         // Create a vector of shared pointers to the elements in the ascending list
-        vector<shared_ptr<int>> asc;
-        shared_ptr<Node> temp = ascending.getHead();
+        vector <shared_ptr<int>> asc;
+        shared_ptr <Node> temp = ascending.getHead();
         while (temp) {
             asc.push_back(temp->getData());
             temp = temp->getNext();

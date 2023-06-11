@@ -11,12 +11,12 @@ namespace ariel {
     }
 
 // Getter for the next node, returns a shared pointer to the next node
-    std::shared_ptr<Node> Node::getNext() const {
+    std::shared_ptr <Node> Node::getNext() const {
         return this->next;
     }
 
 // Setter for the next node, takes a shared pointer to a Node
-    void Node::setNext(std::shared_ptr<Node> newNext) {
+    void Node::setNext(std::shared_ptr <Node> newNext) {
         this->next = std::move(newNext);
     }
 
@@ -31,21 +31,21 @@ namespace ariel {
 // Destructor for LinkedList, cleans up the list
     LinkedList::~LinkedList() {
         while (this->head) {
-            std::shared_ptr<Node> temp = std::move(this->head);
+            std::shared_ptr <Node> temp = std::move(this->head);
             this->head = std::move(temp->next);
         }
     }
 
 // Insert function that takes a shared pointer to an int and inserts it into the list
     void LinkedList::insert(const std::shared_ptr<int> &value) {
-        std::shared_ptr<Node> newNode = std::make_shared<Node>(value);
+        std::shared_ptr <Node> newNode = std::make_shared<Node>(value);
 
         // If the list is empty or the value is smaller than the head's data
         if (!this->head || *value < *this->head->data) {
             newNode->setNext(std::move(this->head));
             this->head = std::move(newNode);
         } else {
-            std::shared_ptr<Node> current = this->head;
+            std::shared_ptr <Node> current = this->head;
             // Find the position to insert the new node
             while (current->getNext() && *value > *current->getNext()->data) {
                 current = current->getNext();
@@ -58,7 +58,7 @@ namespace ariel {
 
 // Display function to print the list
     void LinkedList::display() const {
-        std::shared_ptr<Node> current = this->head;
+        std::shared_ptr <Node> current = this->head;
         while (current) {
             std::cout << *current->getData() << " ";
             current = current->getNext();
@@ -67,7 +67,7 @@ namespace ariel {
     }
 
     void LinkedList::updateIndexes() {
-        std::shared_ptr<Node> current = this->head;
+        std::shared_ptr <Node> current = this->head;
         int currentIndex = 1;
 
         while (current) {
@@ -89,7 +89,7 @@ namespace ariel {
             return;
         }
 
-        std::shared_ptr<Node> current = this->head;
+        std::shared_ptr <Node> current = this->head;
         while (current->getNext() && *current->getNext()->getData() != value) {
             current = current->getNext();
         }
@@ -101,12 +101,12 @@ namespace ariel {
         }
     }
 
-    std::shared_ptr<Node> LinkedList::getHead() {
+    std::shared_ptr <Node> LinkedList::getHead() {
         return this->head;
     }
 
     void LinkedList::insert(const std::shared_ptr<int> &value, int location) {
-        std::shared_ptr<Node> newNode = std::make_shared<Node>(value);
+        std::shared_ptr <Node> newNode = std::make_shared<Node>(value);
 
         // If the list is empty or the location is 1, insert at the beginning
         if (!this->head || location == 1) {
@@ -115,7 +115,7 @@ namespace ariel {
             updateIndexes();
             return;
         } else {
-            std::shared_ptr<Node> current = this->head;
+            std::shared_ptr <Node> current = this->head;
             int currentIndex = 1;
 
             // Traverse the list to find the position to insert the new node

@@ -65,7 +65,7 @@ namespace ariel {
         return *element.lock()->getData();
     }
 
-    std::weak_ptr<Node> MagicalContainer::SideCrossIterator::getElement() const {
+    std::weak_ptr <Node> MagicalContainer::SideCrossIterator::getElement() const {
         return element;
     }
 
@@ -109,14 +109,18 @@ namespace ariel {
 
     // Move assignment operator
     MagicalContainer::SideCrossIterator &
-    MagicalContainer::SideCrossIterator::operator=(SideCrossIterator &&other) noexcept {
-        if (this != &other) {
-            container = other.container;
-            element = std::move(other.element);
-            other.setElementNull();
-        }
-        return *this;
-    }
+    MagicalContainer::SideCrossIterator::operator=(SideCrossIterator &&other)
+
+    noexcept {
+    if (this != &other) {
+    container = other.container;
+    element = std::move(other.element);
+    other.
+
+    setElementNull();
+}
+return *this;
+}
 
 
 }
